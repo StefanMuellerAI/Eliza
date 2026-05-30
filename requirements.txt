@@ -1,0 +1,1 @@
+# ELIZA uses the Python standard library only — no third-party dependencies.

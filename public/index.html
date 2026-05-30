@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELIZA — der Chatbot von Joseph Weizenbaum</title>
+  <meta name="description" content="Interaktive Demo von ELIZA, dem Chatbot von Joseph Weizenbaum (1966). Gleiche Pattern-Matching-Technologie wie das Original — als Demonstration für Seminare." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">E</div>
+        <div>
+          <h1>ELIZA</h1>
+          <p class="brand-sub">DOCTOR &middot; 1966</p>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h2>Worum geht es?</h2>
+        <p>
+          <strong>ELIZA</strong> wurde 1966 von <strong>Joseph Weizenbaum</strong> am MIT
+          geschrieben. Das Skript <em>DOCTOR</em> imitiert einen Psychotherapeuten,
+          der die Aussagen des Gegenübers gespiegelt zurückgibt.
+        </p>
+        <p>
+          Diese Demo nutzt <strong>dieselbe Technik</strong> wie das Original:
+          Schlüsselwörter, Zerlegungs- und Zusammensetzungsregeln
+          (<em>decomposition / reassembly</em>) — <strong>keine</strong> KI,
+          kein neuronales Netz.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <h2>Probier es aus</h2>
+        <ul class="suggestions" id="suggestions">
+          <li><button data-msg="Ich fühle mich in letzter Zeit oft traurig.">„Ich fühle mich oft traurig."</button></li>
+          <li><button data-msg="Meine Mutter versteht mich einfach nicht.">„Meine Mutter versteht mich nicht."</button></li>
+          <li><button data-msg="Ich kann nachts nicht schlafen.">„Ich kann nachts nicht schlafen."</button></li>
+          <li><button data-msg="Bist du eigentlich ein Computer?">„Bist du ein Computer?"</button></li>
+        </ul>
+      </div>
+
+      <div class="info-block toggle-block">
+        <h2>Sprache des Skripts</h2>
+        <div class="lang-toggle" id="langToggle">
+          <button data-lang="de" class="active">Deutsch</button>
+          <button data-lang="en">English (Original)</button>
+        </div>
+        <p class="hint">Das englische Skript ist Weizenbaums Original-DOCTOR.</p>
+      </div>
+
+      <p class="credit">
+        Seminar-Demo &middot; Pattern-Matching-Engine nach
+        <a href="https://github.com/wadetb/eliza" target="_blank" rel="noopener">wadetb/eliza</a> (MIT)
+      </p>
+    </aside>
+
+    <main class="chat">
+      <header class="chat-header">
+        <div class="status">
+          <span class="dot"></span>
+          <span id="statusText">ELIZA hört zu …</span>
+        </div>
+        <button id="resetBtn" class="reset-btn" title="Gespräch neu beginnen">Neues Gespräch</button>
+      </header>
+
+      <div class="messages" id="messages" aria-live="polite"></div>
+
+      <form class="composer" id="composer" autocomplete="off">
+        <input
+          type="text"
+          id="input"
+          name="input"
+          placeholder="Schreib ELIZA, was dich beschäftigt …"
+          aria-label="Nachricht an ELIZA"
+          required
+        />
+        <button type="submit" id="sendBtn" aria-label="Senden">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M2 21l21-9L2 3v7l15 2-15 2z" />
+          </svg>
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
