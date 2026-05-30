@@ -54,10 +54,14 @@ Skript** und Weizenbaums **englischem Original-DOCTOR** wechseln.
 ├── eliza/
 │   ├── engine.py         # Pattern-Matching-Engine (decomposition/reassembly)
 │   └── scripts.py        # DOCTOR-Skripte (Deutsch + englisches Original) als Strings
-├── public/
+├── eliza_web/
+│   └── assets.py         # aus public/ generierte Frontend-Dateien (für das Bundling)
+├── public/               # editierbare Quelle des Frontends
 │   ├── index.html        # Chat-Oberfläche
 │   ├── style.css
 │   └── app.js
+├── scripts/
+│   └── build_assets.py   # bündelt public/ -> eliza_web/assets.py
 ├── cli.py                # ELIZA im Terminal ausprobieren
 └── pyproject.toml        # Python-Projekt + Vercel-Entrypoint (nur Standardbibliothek)
 ```
@@ -66,6 +70,12 @@ Die API ist bewusst **zustandslos**: Das Frontend hält das Gespräch und schick
 bei jeder Anfrage alle bisherigen Nutzer-Nachrichten mit. Der Server spielt sie
 durch eine frische ELIZA-Instanz und antwortet auf die letzte — so bleibt
 ELIZAs Verhalten erhalten, ohne dass der Server Sitzungen speichern muss.
+
+> **Frontend ändern?** Bearbeite die Dateien in `public/` und führe danach
+> `python scripts/build_assets.py` aus. Vercels Python-Runtime bündelt nur per
+> Import erreichbare Module, deshalb wird das Frontend in `eliza_web/assets.py`
+> eingebettet. Ein Test (`test_assets_in_sync`) stellt sicher, dass beides
+> übereinstimmt.
 
 ---
 
@@ -104,6 +114,12 @@ Alternativ per CLI:
 vercel        # Preview-Deploy
 vercel --prod # Produktion
 ```
+
+> **Öffentlich erreichbar machen:** Standardmäßig kann bei neuen Projekten
+> **Deployment Protection** (Vercel Authentication) aktiv sein – dann sehen nur
+> eingeloggte Teammitglieder die Seite (HTTP 401). Für die Nutzung im Seminar
+> unter *Project → Settings → Deployment Protection* die *Vercel Authentication*
+> deaktivieren (oder auf „Only Preview" stellen).
 
 ---
 

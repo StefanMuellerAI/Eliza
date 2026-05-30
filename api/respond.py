@@ -28,8 +28,8 @@ if REPO_ROOT not in sys.path:
     sys.path.insert(0, REPO_ROOT)
 
 from eliza.engine import load_doctor  # noqa: E402
+from eliza_web.assets import ASSETS  # noqa: E402  (frontend embedded for bundling)
 
-PUBLIC_DIR = os.path.join(REPO_ROOT, "public")
 API_PATH = "/api/respond"
 
 CONTENT_TYPES = {
@@ -88,14 +88,12 @@ class handler(BaseHTTPRequestHandler):
         path = self._path()
         if path in ("", "/"):
             path = "/index.html"
-        full = os.path.normpath(os.path.join(PUBLIC_DIR, path.lstrip("/")))
-        if not full.startswith(PUBLIC_DIR) or not os.path.isfile(full):
+        if path not in ASSETS:
             self._send_bytes(404, b"Not found", "text/plain; charset=utf-8")
             return
-        ext = os.path.splitext(full)[1].lower()
-        with open(full, "rb") as f:
-            data = f.read()
-        self._send_bytes(200, data, CONTENT_TYPES.get(ext, "application/octet-stream"))
+        ext = os.path.splitext(path)[1].lower()
+        body = ASSETS[path].encode("utf-8")
+        self._send_bytes(200, body, CONTENT_TYPES.get(ext, "application/octet-stream"))
 
     # ------------------------------------------------------------------ routes
     def do_GET(self):

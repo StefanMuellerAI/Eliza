@@ -42,6 +42,25 @@ def test_quit():
     assert e.respond("tschüss") is None
 
 
+def test_assets_in_sync():
+    """The embedded frontend must match the editable sources in public/."""
+    import pathlib
+    from eliza_web.assets import ASSETS
+
+    public = pathlib.Path(__file__).resolve().parent / "public"
+    expected = {
+        "/index.html": "index.html",
+        "/style.css": "style.css",
+        "/app.js": "app.js",
+    }
+    for route, name in expected.items():
+        assert route in ASSETS, f"missing embedded asset {route}"
+        on_disk = (public / name).read_text(encoding="utf-8")
+        assert ASSETS[route] == on_disk, (
+            f"{name} changed — run: python scripts/build_assets.py"
+        )
+
+
 if __name__ == "__main__":
     for name, fn in sorted(globals().items()):
         if name.startswith("test_") and callable(fn):
