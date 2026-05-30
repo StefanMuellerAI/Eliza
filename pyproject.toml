@@ -1,0 +1,11 @@
+[project]
+name = "eliza-seminar-demo"
+version = "1.0.0"
+description = "ELIZA (Weizenbaum 1966) chatbot demo — same pattern-matching technique, on Vercel."
+requires-python = ">=3.9"
+
+# Vercel's Python runtime uses this entrypoint. Our `handler`
+# (a BaseHTTPRequestHandler in api/respond.py) serves both the JSON chat API
+# at /api/respond and the static frontend from public/.
+[tool.vercel]
+entrypoint = "api.respond:handler"

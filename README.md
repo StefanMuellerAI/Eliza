@@ -50,7 +50,7 @@ Skript** und Weizenbaums **englischem Original-DOCTOR** wechseln.
 ```
 .
 ├── api/
-│   └── respond.py        # Vercel Serverless Function (Python) – die Chat-API
+│   └── respond.py        # Vercel Python-Entrypoint: Chat-API + Auslieferung des Frontends
 ├── eliza/
 │   ├── engine.py         # Pattern-Matching-Engine (decomposition/reassembly)
 │   └── scripts.py        # DOCTOR-Skripte (Deutsch + englisches Original) als Strings
@@ -59,7 +59,7 @@ Skript** und Weizenbaums **englischem Original-DOCTOR** wechseln.
 │   ├── style.css
 │   └── app.js
 ├── cli.py                # ELIZA im Terminal ausprobieren
-└── requirements.txt      # (leer – nur Python-Standardbibliothek)
+└── pyproject.toml        # Python-Projekt + Vercel-Entrypoint (nur Standardbibliothek)
 ```
 
 Die API ist bewusst **zustandslos**: Das Frontend hält das Gespräch und schickt
@@ -94,8 +94,9 @@ Dann <http://localhost:3000> öffnen.
 1. Dieses Repository zu GitHub pushen.
 2. Auf [vercel.com](https://vercel.com) → **Add New… → Project** → das Repo
    importieren.
-3. Keine Einstellungen nötig – Vercel erkennt das statische Frontend in
-   `public/` und die Python-Function in `api/` automatisch. **Deploy** klicken.
+3. Keine Einstellungen nötig – Vercel liest den Python-Entrypoint aus
+   `pyproject.toml` (`api.respond:handler`) und liefert `public/` statisch aus.
+   **Deploy** klicken.
 
 Alternativ per CLI:
 
