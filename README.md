@@ -53,14 +53,12 @@ Skript** und Weizenbaums **englischem Original-DOCTOR** wechseln.
 │   └── respond.py        # Vercel Serverless Function (Python) – die Chat-API
 ├── eliza/
 │   ├── engine.py         # Pattern-Matching-Engine (decomposition/reassembly)
-│   ├── doctor_de.txt     # Deutsches DOCTOR-Skript
-│   └── doctor_en.txt     # Weizenbaums englisches Original-Skript
+│   └── scripts.py        # DOCTOR-Skripte (Deutsch + englisches Original) als Strings
 ├── public/
 │   ├── index.html        # Chat-Oberfläche
 │   ├── style.css
 │   └── app.js
 ├── cli.py                # ELIZA im Terminal ausprobieren
-├── vercel.json
 └── requirements.txt      # (leer – nur Python-Standardbibliothek)
 ```
 

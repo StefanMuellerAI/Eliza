@@ -242,12 +242,17 @@ class Eliza:
 
 
 def load_doctor(language='de'):
-    """Return a fresh Eliza instance loaded with the requested DOCTOR script."""
-    import os
-    here = os.path.dirname(os.path.abspath(__file__))
-    filename = 'doctor_de.txt' if language == 'de' else 'doctor_en.txt'
+    """Return a fresh Eliza instance loaded with the requested DOCTOR script.
+
+    Scripts are embedded as Python strings (see `eliza/scripts.py`) so the
+    serverless deployment never depends on bundling external data files.
+    """
+    try:
+        from .scripts import SCRIPTS
+    except ImportError:  # allow running this file directly
+        from scripts import SCRIPTS
     eliza = Eliza()
-    eliza.load(os.path.join(here, filename))
+    eliza.load_string(SCRIPTS.get(language, SCRIPTS['de']))
     return eliza
 
 

@@ -12,6 +12,6 @@ MIT-licensed Python port:
 
 > https://github.com/wadetb/eliza — Copyright (c) 2019 Wade Brainerd, MIT License.
 
-The original English `DOCTOR` script (`eliza/doctor_en.txt`) is taken from that
-repository. The German `DOCTOR` script (`eliza/doctor_de.txt`) was written for
+The original English `DOCTOR` script (`DOCTOR_EN` in `eliza/scripts.py`) is taken
+from that repository. The German `DOCTOR` script (`DOCTOR_DE`) was written for
 this project, following the same decomposition/reassembly conventions.
